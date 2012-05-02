@@ -64,7 +64,7 @@
 		</filter-mapping> -->
 	<taglib>
 		<taglib-uri>oscache</taglib-uri>
-		<taglib-location>../oscache.tld</taglib-location>
+		<taglib-location>/WEB-INF/classes/oscache.tld</taglib-location>
 	</taglib>
 	
 	<listener>
