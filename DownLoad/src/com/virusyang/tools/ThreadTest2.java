@@ -17,14 +17,14 @@ public class ThreadTest2 {
 			public void run() {
 				for (int i = 0; i < 10;) {
 					try {
-							l.lock();
-							c++;
-							i++;
-							
-							System.out.println(Thread.currentThread().getName()
-									+ " t1 this is " +c);
-							l.unlock();
-						
+						l.lock();
+						c++;
+						i++;
+
+						System.out.println(Thread.currentThread().getName()
+								+ " t1 this is " + c);
+						l.unlock();
+
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -35,20 +35,20 @@ public class ThreadTest2 {
 		Thread t2 = new Thread() {
 			public void run() {
 				for (int i = 0; i < 10;) {
-					
-						try {
-							if (l.tryLock(250,TimeUnit.MILLISECONDS)) {
-								c++;
-								i++;
-								System.out.println(Thread.currentThread().getName()
-										+ " t2 this is " +c);
-								l.unlock();
-							}
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+
+					try {
+						if (l.tryLock(250, TimeUnit.MILLISECONDS)) {
+							c++;
+							i++;
+							System.out.println(Thread.currentThread().getName()
+									+ " t2 this is " + c);
+							l.unlock();
 						}
-					
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
 			}
 		};
@@ -60,9 +60,9 @@ public class ThreadTest2 {
 						if (l.tryLock()) {
 							c++;
 							i++;
-							
+
 							System.out.println(Thread.currentThread().getName()
-									+ " t3 this is " +c);
+									+ " t3 this is " + c);
 							l.unlock();
 						}
 					} catch (Exception e) {
@@ -72,7 +72,7 @@ public class ThreadTest2 {
 				}
 			}
 		};
-		
+
 		Thread t4 = new Thread() {
 			public void run() {
 				for (int i = 0; i < 10;) {
@@ -80,9 +80,9 @@ public class ThreadTest2 {
 						if (l.tryLock()) {
 							c++;
 							i++;
-							
+
 							System.out.println(Thread.currentThread().getName()
-									+ " t4 this is " +c);
+									+ " t4 this is " + c);
 							l.unlock();
 						}
 					} catch (Exception e) {
@@ -92,13 +92,12 @@ public class ThreadTest2 {
 				}
 			}
 		};
-		
-		
+
 		t2.start();
 		t1.start();
 		t3.start();
 		t4.start();
-		
+
 	}
 
 }

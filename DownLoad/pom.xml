@@ -4,4 +4,17 @@
   <artifactId>DownLoad</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  <repositories>
+  <repository>
+    <id>sourceforge</id>
+    <url>http://oss.sonatype.org/content/groups/sourceforge/</url>
+    <releases>
+      <enabled>true</enabled>
+    </releases>
+    <snapshots>
+      <enabled>true</enabled>
+    </snapshots>
+  </repository>
+</repositories>
+  
 </project>
