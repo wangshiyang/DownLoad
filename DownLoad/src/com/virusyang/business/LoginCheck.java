@@ -1,5 +1,6 @@
 package com.virusyang.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.ehcache.Cache;
@@ -32,10 +33,17 @@ public class LoginCheck {
 		this.userdao = userdao;
 	}
 	public boolean isVilable(Userinfo user){
+		List l=new ArrayList();
 //		System.out.println(userdao.findAll().size());
 		Element element=cache.get(user.getUsername());
-		
-		List l=userdao.findByUsername(user.getUsername());
+		if(element==null){
+		l=userdao.findByUsername(user.getUsername());
+		element=new Element(user.getUsername(), l);
+		cache.put(element);
+		System.out.println("我是不是为空?是还没初始化!");
+		}
+		System.out.println("我已经出来了!");
+		l=(ArrayList)element.getValue();
 //		System.out.println(l.size());
 		if(l.size()<=0) 
 			return false;
@@ -47,5 +55,6 @@ public class LoginCheck {
 			return true;
 		else 
 			return false;
+		
 	}
 }

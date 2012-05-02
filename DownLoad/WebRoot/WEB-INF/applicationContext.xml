@@ -79,4 +79,14 @@
 	<property name="configLocation">
 		<value>ehcache.xml</value>
 	</property></bean>
+	<bean id="download" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+	<property name="cacheManager">
+		<ref local="defaultEhcacheManager"></ref>
+	</property>
+	<property name="download">
+		<value>download</value>
+	</property>
+	</bean>
+	
+	
 </beans>
