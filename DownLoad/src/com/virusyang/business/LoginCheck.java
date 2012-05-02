@@ -2,10 +2,18 @@ package com.virusyang.business;
 
 import java.util.List;
 
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
+
 import com.virusyang.bean.Userinfo;
 import com.virusyang.dao.UserDao;
 
 public class LoginCheck {
+	private Cache cache;
+	
+	public void setCache(Cache cache){
+		this.cache=cache;
+	}
 	private Userinfo user;
 	public Userinfo getUser() {
 		return user;
@@ -25,6 +33,8 @@ public class LoginCheck {
 	}
 	public boolean isVilable(Userinfo user){
 //		System.out.println(userdao.findAll().size());
+		Element element=cache.get(user.getUsername());
+		
 		List l=userdao.findByUsername(user.getUsername());
 //		System.out.println(l.size());
 		if(l.size()<=0) 

@@ -82,7 +82,7 @@ public class UserDao extends HibernateDaoSupport {
 			throw re;
 		}
 	}
-
+	
 	public List<Userinfo> findByUsername(Object username) {
 		return findByProperty(USERNAME, username);
 	}

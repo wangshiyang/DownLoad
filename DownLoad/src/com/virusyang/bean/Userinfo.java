@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.cache.annotation.Cacheable;
 
 
 
@@ -49,7 +50,6 @@ public class Userinfo  implements java.io.Serializable {
     @Id @GeneratedValue(strategy=IDENTITY)
     
     @Column(name="id", unique=true, nullable=false)
-
     public Integer getId() {
         return this.id;
     }
@@ -59,7 +59,6 @@ public class Userinfo  implements java.io.Serializable {
     }
     
     @Column(name="username", length=10)
-
     public String getUsername() {
         return this.username;
     }
@@ -69,7 +68,6 @@ public class Userinfo  implements java.io.Serializable {
     }
     
     @Column(name="password", length=20)
-
     public String getPassword() {
         return this.password;
     }
