@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/dibang">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	-->
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<!--class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		第一行为注解映射
+		第二行为配置文件映射**.hbm.xml
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		-->
+		<property name="configLocation">
+			<value>/WEB-INF/hibernate.cfg.xml</value>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">
+					true
+				</prop>
+			</props>
+		</property>
+		
+		<!--<property name="packagesToScan">
+			<list>
+				<value>com.virusyang.bean.*</value>
+			</list>
+		</property>
+		--><!--<property name="mappingResources">
+			<list>
+				<value>com.virusyang.bean.User</value>
+			</list>
+		</property>
+		
+		--></bean>
+	<bean name="UserDao" class="com.virusyang.dao.UserDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean name="Userinfo" class="com.virusyang.bean.Userinfo">
+	</bean>
+	
+	<bean name="CheckService" class="com.virusyang.business.LoginCheck">
+		<property name="userdao">
+			<ref bean="UserDao" />
+		</property>
+		<property name="user">
+			<ref bean="Userinfo" />
+		</property>
+	</bean>
+	<bean name="DownActionCheck" class="com.virusyang.download.DownActionCheck">
+		<property name="lc">
+			<ref bean="CheckService" />
+		</property>
+		<property name="user">
+			<ref bean="Userinfo" />
+		</property>
+
+	</bean>
+
+</beans>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<package name="intercep" extends="struts-default">
+		<interceptors>
+			<interceptor name="authvilable" class="com.virusyang.filter.GrantFilter">
+			</interceptor>
+			<interceptor-stack name="myDefault">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="authvilable"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myDefault"></default-interceptor-ref>
+	</package>
+	<package name="user" extends="intercep">
+		
+		<action name="login" method="login" class="DownActionCheck">
+		 <result name="SUCCESS">/success.jsp</result>
+		 <result name="INPUT">/error.jsp</result>
+		</action>
+		
+	</package>
+</struts>    

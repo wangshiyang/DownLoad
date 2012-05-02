@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="DownLoad"
+  id="myeclipse.1317346567939"
+  context-root="/DownLoad"
+  j2ee-spec="5.0"
+  archive="DownLoad.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
