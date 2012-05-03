@@ -75,13 +75,13 @@
 
 	</bean>
 	
-	<bean id="defaultEhcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+	<bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 	<property name="configLocation">
-		<value>ehcache.xml</value>
+		<value>/WEB-INF/ehcache.xml</value>
 	</property></bean>
 	<bean id="download" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 	<property name="cacheManager">
-		<ref local="defaultEhcacheManager"></ref>
+		<ref local="ehcacheManager"></ref>
 	</property>
 	<property name="download">
 		<value>download</value>
