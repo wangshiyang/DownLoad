@@ -15,6 +15,7 @@ public class LoginCheck {
 	public void setCache(Cache cache){
 		this.cache=cache;
 	}
+	
 	private Userinfo user;
 	public Userinfo getUser() {
 		return user;
@@ -34,6 +35,7 @@ public class LoginCheck {
 	}
 	public boolean isVilable(Userinfo user){
 		List l=new ArrayList();
+		System.out.println("开始执行程序了!");
 //		System.out.println(userdao.findAll().size());
 		Element element=cache.get(user.getUsername());
 		if(element==null){

@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
-		http://www.springframework.org/dtd/spring-beans.dtd">
-	<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver">
-		</property>
-		<property name="url" value="jdbc:mysql://localhost:3306/dibang">
-		</property>
-		<property name="username" value="root"></property>
-		<property name="password" value="root"></property>
-	</bean>
-	-->
-	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> 
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"> </property> 
+		<property name="url" value="jdbc:mysql://localhost:3306/dibang"> </property> 
+		<property name="username" value="root"></property> <property name="password" 
+		value="root"></property> </bean> -->
+
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<!--class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		第一行为注解映射
-		第二行为配置文件映射**.hbm.xml
-		<property name="dataSource">
-			<ref bean="dataSource" />
-		</property>
-		-->
+		<!--class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> 
+			第一行为注解映射 第二行为配置文件映射**.hbm.xml <property name="dataSource"> <ref bean="dataSource" 
+			/> </property> -->
 		<property name="configLocation">
 			<value>/WEB-INF/hibernate.cfg.xml</value>
 		</property>
@@ -35,28 +26,37 @@
 				</prop>
 			</props>
 		</property>
-		
-		<!--<property name="packagesToScan">
-			<list>
-				<value>com.virusyang.bean.*</value>
-			</list>
+
+		<!--<property name="packagesToScan"> <list> <value>com.virusyang.bean.*</value> 
+			</list> </property> --><!--<property name="mappingResources"> <list> <value>com.virusyang.bean.User</value> 
+			</list> </property> -->
+	</bean>
+	
+	
+	<bean id="ehcacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>/WEB-INF/ehcache.xml</value>
 		</property>
-		--><!--<property name="mappingResources">
-			<list>
-				<value>com.virusyang.bean.User</value>
-			</list>
+	</bean>
+	<bean id="cache"
+		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager">
+			<ref local="ehcacheManager"></ref>
 		</property>
-		
-		--></bean>
+		<property name="cacheName">
+			<value>cache</value>
+		</property>
+	</bean>
 	<bean name="UserDao" class="com.virusyang.dao.UserDao">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	
+
 	<bean name="Userinfo" class="com.virusyang.bean.Userinfo">
 	</bean>
-	
+
 	<bean name="CheckService" class="com.virusyang.business.LoginCheck">
 		<property name="userdao">
 			<ref bean="UserDao" />
@@ -74,19 +74,8 @@
 		</property>
 
 	</bean>
-	
-	<bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-	<property name="configLocation">
-		<value>/WEB-INF/ehcache.xml</value>
-	</property></bean>
-	<bean id="download" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-	<property name="cacheManager">
-		<ref local="ehcacheManager"></ref>
-	</property>
-	<property name="download">
-		<value>download</value>
-	</property>
-	</bean>
-	
-	
+
+
+
+
 </beans>
